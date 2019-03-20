@@ -7,7 +7,8 @@ const ToDoForm= props =>{
             value={props.task}
             onChange={props.handleChanges}
             placeholder='...todo'/>
-            <button onClick={props.updateList}>Add ToDo</button>
+            <button class='btn' onClick={props.updateList}>Add ToDo</button>
+            <button class='btn'>Clear Completed</button>
         </form>
     )
 }
