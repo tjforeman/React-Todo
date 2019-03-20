@@ -7,7 +7,7 @@ const ToDoList= props =>{
     return(
         props.list.map((event)=>{
             return(
-                <ToDo task={event.task} />
+                <ToDo key={event.id} task={event.task} />
             )
         })
     )

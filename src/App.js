@@ -26,12 +26,32 @@ class App extends React.Component {
     completed:''
     }
   }
+  handleChanges = event => {
+    console.log("event: ", event.target);
+    this.setState({ 
+      task: event.target.value
+    });
+  };
+  updateList = event =>{
+    event.preventDefault();
+    const newToDo={
+      task:this.state.task,
+      id:Date.now(),
+      completed:false
+    }
+    this.setState({
+      list:[...this.state.list,newToDo]
+    })
+  }
   render() {
     return (
       <div>
-        <h1>Todo list: MVP</h1>
+        <h1>Todo list:</h1>
         <ToDoList list={this.state.list}/>
-        <ToDoForm />
+        <ToDoForm task={this.state.task}
+        handleChanges={this.handleChanges}
+        updateList={this.updateList}
+         />
       </div>
     );
   }
