@@ -1,6 +1,7 @@
 import React from 'react';
 import ToDoList from './components/TodoComponents/TodoList'
 import ToDoForm from './components/TodoComponents/TodoForm'
+import './components/TodoComponents/Todo.css'
 
 const list = [
   {
@@ -21,11 +22,24 @@ class App extends React.Component {
   constructor(){
     super();
     this.state ={
-    list:list,
-    task:'',
-    completed:''
-    }
+    list
+    };
   }
+toggleItem= id =>{
+const newList=this.state.list.map(item =>{
+if (item.id===id){
+  item.completed=!item.completed;
+
+  return item;
+}else{
+  return item;
+}
+});
+// console.log(newList)
+this.setState({list:newList})
+};
+
+
   handleChanges = event => {
     console.log("event: ", event.target);
     this.setState({ 
@@ -43,14 +57,20 @@ class App extends React.Component {
       list:[...this.state.list,newToDo]
     })
   }
+  clearCompleted = event =>{
+    event.preventDefault();
+    this.setState({
+      list: this.state.list.filter((item) => !item.completed)
+    })
+  }
   render() {
     return (
-      <div>
+      <div className='container'>
         <h1>Todo list:</h1>
-        <ToDoList list={this.state.list}/>
+        <ToDoList list ={this.state.list}toggleItem={this.toggleItem}/>
         <ToDoForm task={this.state.task}
         handleChanges={this.handleChanges}
-        updateList={this.updateList}
+        updateList={this.updateList} clearCompleted={this.clearCompleted}
          />
       </div>
     );
